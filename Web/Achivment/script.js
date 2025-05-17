@@ -168,10 +168,7 @@ async function initializeAchivments() {
 
     // Получаем данные с сервера
     if (userId != 0) {
-        AchievementsData = (await fetchAchivmentsData(userId)).Achivment;
-        NameData = (await fetchAchivmentsData(userId)).Name;
-        GroupData = (await fetchAchivmentsData(userId)).Group;
-        PointData = (await fetchAchivmentsData(userId)).Point;
+        await fetchMarksData(userId)
     } else {
         AchievementsData = GuestData
         NameData = "Гость"
