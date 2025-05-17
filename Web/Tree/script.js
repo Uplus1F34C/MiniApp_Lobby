@@ -414,9 +414,9 @@ async function initializeTopics() {
             // Добавляем изображение, если оно есть
             if (topic.img) {
                 const img = document.createElement('img');
-                img.src = `img/TOPIC/${topic.img}`;
+                img.src = `./img/TOPIC/${topic.img}`;
                 console.log(img.src);
-                console.log(i`img/TOPIC/${topic.img}`);
+                console.log(`img/TOPIC/${topic.img}`);
                 topicBtn.appendChild(img);
             }
 
