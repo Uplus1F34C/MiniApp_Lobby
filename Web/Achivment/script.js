@@ -127,6 +127,11 @@ let GuestData = {
     }
 }
 
+let AchievementsData = {}
+let NameData = {}
+let GroupData = {}
+let PointData = {}
+
 const API_BASE_URL = 'http://localhost:8000';
 
 async function fetchAchivmentsData(tgId) {
@@ -139,11 +144,15 @@ async function fetchAchivmentsData(tgId) {
         const userdata = await user.json();
         
         if (data.status && userdata.status && !data.error && data.achivments) {
-            console.log(userdata)
-            return {"Achivment": data.achivments, "Name": userdata.name, "Group": userdata.group, "Point": userdata.points};
+            AchievementsData = data.achivments;
+            NameData = userdata.name;
+            GroupData = userdata.group;
+            PointData = userdata.points;
         } else {
-            console.error('Ошибка в данных тем:', data.info);
-            return {"Achivment": GuestData, "Name": "Гость", "Group": "C-IT-2", "Point": "0"};
+            AchievementsData = GuestData
+            NameData = "Гость";
+            GroupData = "C-IT-1";
+            PointData = "0";
         }
     } catch (error) {
         console.error('Ошибка при запросе данных достижений:', error);
@@ -186,7 +195,7 @@ async function initializeAchivments() {
         
         ach.innerHTML = `
             <div class="ach-front">
-                <img src="Img/Achivment/${data.img}.png" alt="${title}">
+                <img src="Img/ACHIVMENT/${data.img}.png" alt="${title}">
             </div>
             <div class="ach-back">
                 <div class="ach-top">
