@@ -46,6 +46,24 @@ main {
     background-color: #65DBC9;
     height: 100%;
 }
+
+main #Topic-container::-webkit-scrollbar {
+  width: 8px; /* Ширина скроллбара */
+}
+main #Topic-container::-webkit-scrollbar-track {
+  background: rgb(74, 125, 125); /* Цвет трека */
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+main #Topic-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4); /* Цвет ползунка */
+  border-radius: 4px;
+}
+main #Topic-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.8); 
+} 
+
+
 main #logo {
   position: fixed;
   top: 0; /* Изменено с 50% на 0 для полного покрытия высоты */
@@ -136,6 +154,7 @@ main #Topic-container div {
   align-items: center;
   justify-content:center;
 }
+
 #flex-2 {
   margin-left: 10px;
   
@@ -148,11 +167,11 @@ main #Topic-container div {
 }
 #mark {
   resize: none;
-  min-width: 60px;
-  height: 60px;
+  min-width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: rgb(45, 219, 45);
-  font-size: 40px;
+  font-size: 25px;
   border: 2px solid #000000;
   margin: 10px;
 
@@ -168,31 +187,30 @@ main #Topic-container div {
   
   color: black;
   
-  font-size: 20px;
+  font-size: 15px;
   font-family: monospace;
   
   text-align: center;
 }
 #points {
-  width: 100px;
-  height: 30px;
+  min-width: 50px;
+  height: 25px;
   border-radius: 10px;
   margin-top: -15px;
   background-color: #E275E0;
-  border: 2px solid #000000;
-  font-size: 20px;
+  border: 1px solid #000000;
+  font-size: 17px;
 
   display:flex;
   justify-content: center;
   align-items: center;
 }
 #title {
-  font-size: 25px;
+  font-size: 22px;
   color: white;
   -webkit-text-stroke: 0.5px black; /* Толщина и цвет обводки (для браузеров, использующих движок WebKit, например Google Chrome) */
 }
 /* ========== INFO ========== */
-
 /* ========== MAIN ========== */
 
 

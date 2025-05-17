@@ -1,8 +1,11 @@
 const userId = 0
 
 if (window.Telegram && window.Telegram.WebApp) {
+    const TG = window.Telegram.WebApp
 
-    const initData = window.Telegram.WebApp.initData;
+    TG.disableVerticalSwipes()
+
+    const initData = TG.initData;
 
     // Парсим initData (он в формате URL-encoded строки)
     const params = new URLSearchParams(initData);
@@ -460,7 +463,7 @@ function showTopicInfo(topic, topicBtn, event) {
 // Подсвечивает выбранную тему
 function highlightSelectedTopic(topicBtn) {
     // Сбрасываем стиль всех кнопок
-    document.querySelectorAll('#flex-container button').forEach(btn => {
+    document.querySelectorAll('#Topic-container button').forEach(btn => {
         btn.style.border = '1px solid #000000';
     });
     // Подсвечиваем текущую
@@ -480,7 +483,9 @@ function positionInfoBlock(infoBlock, topicBtn, event) {
         style.top = "auto";
         style.right = "auto";
         style.width = "300px";
-        style.borderRadius = "0 20px 0 0";
+        style.borderRadius = "20px";
+        style.left = "5px";
+        style.bottom = "85px";
     } else if (window.innerWidth > 350) {
         // Для мобильной версии - сверху
         style.top = "80px"
@@ -503,7 +508,7 @@ document.addEventListener('click', (event) => {
     
     if (!infoBlock.contains(event.target) && !event.target.closest('button')) {
         infoBlock.style.display = 'none';
-        document.querySelectorAll('#flex-container button').forEach(btn => {
+        document.querySelectorAll('#Topic-container button').forEach(btn => {
             btn.style.border = '1px solid #000000';
         });
     }
