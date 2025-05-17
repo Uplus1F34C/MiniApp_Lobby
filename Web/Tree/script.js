@@ -13,7 +13,7 @@ if (window.Telegram && window.Telegram.WebApp) {
 
         if (userStr) {
             const user = JSON.parse(userStr);
-            const userId = user.id;
+            userId = user.id;
         } else {
             console.error('User data not found in initData');
         }
@@ -27,49 +27,8 @@ console.log('User ID:', userId);
 function getRandomMark() {
     return Math.floor(Math.random() * 4); 
 }
-const MARK_COLORS = {
-    3: '#4AB968', // зеленый
-    2: '#E6F355', // желтый
-    1: '#F35555', // красный
-    0: '#D4D4D4', // серый (для mark: 0)
-    default: '#D4D4D4' // серый (по умолчанию)
-};
 
-
-const API_BASE_URL = 'http://localhost:8000';
-
-async function fetchMarksData(tgId) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/get_marks/${tgId}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        
-        if (data.status && !data.error && data.topics) {
-            return data.topics;
-        } else {
-            console.error('Ошибка в данных тем:', data.info);
-            return {};
-        }
-    } catch (error) {
-        console.error('Ошибка при запросе данных тем:', error);
-        return {};
-    }
-}
-
-async function initializeTopics() {
-    const container = document.getElementById('Topic-container');
-
-    // Показываем заглушку на время загрузки
-    container.innerHTML = '<p>Загрузка данных тем...</p>';
-
-    let topicsData = {}
-
-    // Получаем данные с сервера
-    if (userId != 0) {
-        topicsData = await fetchMarksData(userId);
-    } else {
-        alert("Вы авторизованы как гость!")
-        topicsData = { 
+let GuestData = { 
     "1": {
         "title": "Введение в информационные технологии",
         "topics": {
@@ -381,20 +340,75 @@ async function initializeTopics() {
             } 
         }
     }
+};
+
+const MARK_COLORS = {
+    3: '#4AB968', // зеленый
+    2: '#E6F355', // желтый
+    1: '#F35555', // красный
+    0: '#D4D4D4', // серый (для mark: 0)
+    default: '#D4D4D4' // серый (по умолчанию)
+};
+
+const API_BASE_URL = 'http://localhost:8000';
+
+async function fetchMarksData(tgId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/get_marks/${tgId}`);
+        const user = await fetch(`${API_BASE_URL}/get_student_info/${tgId}`);
+        if (!response.ok) throw new Error(`user: HTTP error! status: ${response.status}`);
+        if (!user.ok) throw new Error(`user: HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        const userdata = await user.json();
+        
+        if (data.status && userdata.status && !data.error && data.topics) {
+            console.log(userdata)
+            return {"Marks": data.topics, "Name": userdata.name, "Group": userdata.group, "Point": userdata.points};
+        } else {
+            console.error('Ошибка в данных тем:', data.info);
+            return {"Marks": GuestData, "Name": "Гость", "Group": "C-IT-2", "Point": "0"};
+        }
+    } catch (error) {
+        console.error('Ошибка при запросе данных тем:', error);
+        return {};
+    }
 }
+
+async function initializeTopics() {
+    const container = document.getElementById('Topic-container');
+
+    // Показываем заглушку на время загрузки
+    container.innerHTML = '<p>Загрузка данных тем...</p>';
+
+    let topicsData = {}
+
+    // Получаем данные с сервера
+    if (userId != 0) {
+        TopicsData = (await fetchMarksData(userId)).Marks;
+        NameData = (await fetchMarksData(userId)).Name;
+        GroupData = (await fetchMarksData(userId)).Group;
+        PointData = (await fetchMarksData(userId)).Point;
+    } else {
+        TopicsData = GuestData
+        NameData = "Гость"
+        GroupData = "C-IT-1"
+        PointData = "0"
     }
 
-    if (Object.keys(topicsData).length === 0) {
+    if (Object.keys(TopicsData).length === 0) {
         container.innerHTML = '<p>Не удалось загрузить данные тем</p>';
         return;
     }
 
+    document.getElementById('Name').textContent = `Привет, ${NameData}!`
+    document.getElementById('Group').textContent = `Группа: ${GroupData}`
+    document.getElementById('Point').textContent = `Баллы: ${PointData}`
     // Очищаем контейнер перед добавлением новых данных
     container.innerHTML = '';
 
     // Создаем блоки для каждой ветки (раздела)
-    Object.keys(topicsData).forEach(branchId => {
-        const branch = topicsData[branchId];
+    Object.keys(TopicsData).forEach(branchId => {
+        const branch = TopicsData[branchId];
         const branchBlock = document.createElement('div');
         branchBlock.textContent = branch.title;
         branchBlock.style.fontSize = '20px';
