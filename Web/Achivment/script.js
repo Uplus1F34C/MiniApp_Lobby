@@ -149,14 +149,17 @@ async function fetchAchivmentsData(tgId) {
             GroupData = userdata.group;
             PointData = userdata.points;
         } else {
-            AchievementsData = GuestData
+            AchievementsData = GuestData;
             NameData = "Гость";
             GroupData = "C-IT-1";
             PointData = "0";
         }
     } catch (error) {
         console.error('Ошибка при запросе данных достижений:', error);
-        return {};
+        AchievementsData = GuestData;
+        NameData = "Гость";
+        GroupData = "C-IT-1";
+        PointData = "0";
     }
 }
 

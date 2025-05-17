@@ -379,7 +379,10 @@ async function fetchMarksData(tgId) {
         }
     } catch (error) {
         console.error('Ошибка при запросе данных тем:', error);
-        return {};
+        TopicsData = GuestData;
+        NameData = "Гость";
+        GroupData = "C-IT-1";
+        PointData = "0";
     }
 }
 
