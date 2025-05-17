@@ -1,0 +1,4 @@
+Bot/.env
+Bot/config.py
+Bot/main_bot.py
+Bot/__pycache__/config.cpython-312.pyc
