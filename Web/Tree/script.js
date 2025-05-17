@@ -1,4 +1,4 @@
-const userId = 0
+let userId = 0
 
 if (window.Telegram && window.Telegram.WebApp) {
     const TG = window.Telegram.WebApp
