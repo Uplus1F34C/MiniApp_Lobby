@@ -1,4 +1,4 @@
-const userId = 0
+let userId = 0
 
 if (window.Telegram && window.Telegram.WebApp) {
     const TG = window.Telegram.WebApp
@@ -342,6 +342,11 @@ let GuestData = {
     }
 };
 
+let TopicsData = {}
+let NameData = {}
+let GroupData = {}
+let PointData = {}
+
 const MARK_COLORS = {
     3: '#4AB968', // зеленый
     2: '#E6F355', // желтый
@@ -362,11 +367,15 @@ async function fetchMarksData(tgId) {
         const userdata = await user.json();
         
         if (data.status && userdata.status && !data.error && data.topics) {
-            console.log(userdata)
-            return {"Marks": data.topics, "Name": userdata.name, "Group": userdata.group, "Point": userdata.points};
+            TopicsData = data.topics;
+            NameData = userdata.name;
+            GroupData = userdata.group;
+            PointData = userdata.points;
         } else {
-            console.error('Ошибка в данных тем:', data.info);
-            return {"Marks": GuestData, "Name": "Гость", "Group": "C-IT-2", "Point": "0"};
+            TopicsData = GuestData;
+            NameData = "Гость";
+            GroupData = "C-IT-1";
+            PointData = "0";
         }
     } catch (error) {
         console.error('Ошибка при запросе данных тем:', error);
@@ -380,24 +389,14 @@ async function initializeTopics() {
     // Показываем заглушку на время загрузки
     container.innerHTML = '<p>Загрузка данных тем...</p>';
 
-    let topicsData = {}
-
     // Получаем данные с сервера
     if (userId != 0) {
-        TopicsData = (await fetchMarksData(userId)).Marks;
-        NameData = (await fetchMarksData(userId)).Name;
-        GroupData = (await fetchMarksData(userId)).Group;
-        PointData = (await fetchMarksData(userId)).Point;
+        await fetchMarksData(userId)
     } else {
-        TopicsData = GuestData
-        NameData = "Гость"
-        GroupData = "C-IT-1"
-        PointData = "0"
-    }
-
-    if (Object.keys(TopicsData).length === 0) {
-        container.innerHTML = '<p>Не удалось загрузить данные тем</p>';
-        return;
+        TopicsData = GuestData;
+        NameData = "Гость";
+        GroupData = "C-IT-1";
+        PointData = "0";
     }
 
     document.getElementById('Name').textContent = `Привет, ${NameData}!`
