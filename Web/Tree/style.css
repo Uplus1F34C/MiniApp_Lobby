@@ -1,0 +1,184 @@
+body {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: "Comic Relief";
+  touch-action: manipulation;
+}
+/* ========== HEADER ========== */
+header {
+    top: 0;
+    background-color: #A179DD;
+    padding: 5px;
+    padding-left: 10px;
+    
+    z-index: 1;
+}
+header div{
+    display: flex;
+}
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+header p {
+    margin: 0;
+    margin-top: 5px;
+    margin-left: 2px;
+    margin-right: 18px;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0px 5px;
+}
+/* ========== HEADER ========== */
+
+/* ========== MAIN ========== */
+main {
+    background-color: #65DBC9;
+    height: 100%;
+}
+main #logo {
+  position: fixed;
+  top: 0; /* Изменено с 50% на 0 для полного покрытия высоты */
+  left: 0;
+  width: 100%; /* 50% ширины viewport */
+  height: 100%; /* 100% высоты viewport */
+  overflow: visible;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  backface-visibility: hidden; /* Улучшает производительность */
+  transform: translate3d(0, 0, 0); /* Аппаратное ускорение */
+}
+
+main #logo-img {
+  position: absolute;
+  left: -50%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+  width: 100%; /* Ширина в 2 раза больше контейнера */
+  height: auto;
+  filter: opacity(0.4);
+  animation: rotate 20s linear infinite;
+  
+  will-change: transform; /* Оптимизация для анимации */
+  transform: translate3d(0, 0, 0); /* Аппаратное ускорение */
+}
+
+@keyframes rotate {
+  from {
+      transform: rotate(0deg); /* Начальное положение */
+  }
+  to {
+      transform: rotate(360deg); /* Конечное положение */
+  }
+}
+/* ========== MAIN ========== */
+
+
+/* ========== FOOTER ========== */
+footer {
+    bottom: 0;
+    background-color: #C7B451;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+
+    z-index: 1;
+}
+footer div{
+    bottom: 0;
+    background-color: #DBCF91;
+    height: 80%;
+    width: 95%;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content:center;
+    align-items: center;
+
+    border-radius: 20px;
+}
+footer div button {
+    background-color: rgba(0, 0, 0, 0);
+    height: 90%;
+    width: 32%;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    
+    border-radius: 20px;
+    border:none;
+}
+footer div button img{
+    height: 90%;
+    width: auto;
+}
+footer div .active{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+footer div .noactive{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* ========== FOOTER ========== */
+
+@media (min-width: 350px) {
+    header h1 {
+        font-size: 30px;
+    }
+    header p {
+        font-size: 20px;
+    }
+    footer {
+        height: 100px;
+    }
+}
+
+@media (min-width: 500px) {
+    main #logo-img {
+        left: -45%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+        width: 90%; /* Ширина в 2 раза больше контейнера */
+    }
+}
+
+@media (min-width: 600px) {
+    main #logo-img {
+        left: -40%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+        width: 80%; /* Ширина в 2 раза больше контейнера */
+    }
+}
+
+@media (min-width: 700px) {
+    main #logo-img {
+        left: -35%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+        width: 70%; /* Ширина в 2 раза больше контейнера */
+    }
+}
+
+@media (min-width: 800px) {
+    main #logo-img {
+        left: -30%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+        width: 60%; /* Ширина в 2 раза больше контейнера */
+    }
+}
+
+@media (min-width: 900px) {
+    main #logo-img {
+        left: -25%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+        width: 50%; /* Ширина в 2 раза больше контейнера */
+    }
+}
+
+@media (min-width: 1000px) {
+    main #logo-img {
+        left: -20%; /* Сдвигаем влево на 100%, чтобы показывать правую половину */
+        width: 40%; /* Ширина в 2 раза больше контейнера */
+    }
+}

@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TEST</title>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <link rel="stylesheet" href="Tree/style.css">  
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
 
-</head>
-<body>
-    <h1>Hello, Mini App!</h1>
+    </head>
+    <body>
+        <header>
+            <h1>Привет, Даниил!</h1>
+            <div>
+                <p>Группа: У-IT-2</p>
+                <p>Баллы: 130</p>
+            </div>
+        </header>
+
+        <main>
+            <div id="logo">
+                <img id="logo-img" src="Img/Kvantorium_logo.svg"/>
+            </div>
+        </main>
+
+        <footer>
+            <div>
+                <button id="Tree" class="active"><img src="Img/Menu/Tree.png"></button>
+                <button id="Achivment" class="noactive"><img src="Img/Menu/Achivment.png"></button>
+                <button id="Rating" class="noactive"><img src="Img/Menu/Rating.png"></button>
+            </div>
+        </footer>
+    </body>
+    <script src="Tree/script.js"></script>
     <script>
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
     </script>
-</body>
 </html>
