@@ -166,8 +166,6 @@ async function initializeAchivments() {
     // Показываем заглушку на время загрузки
     container.innerHTML = '<p>Загрузка данных тем...</p>';
 
-    let AchievementsData = {}
-
     // Получаем данные с сервера
     if (userId != 0) {
         AchievementsData = (await fetchAchivmentsData(userId)).Achivment;
