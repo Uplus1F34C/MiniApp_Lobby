@@ -168,7 +168,7 @@ async function initializeAchivments() {
 
     // Получаем данные с сервера
     if (userId != 0) {
-        await fetchMarksData(userId)
+        await fetchAchivmentsData(userId)
     } else {
         AchievementsData = GuestData
         NameData = "Гость"
